@@ -49,3 +49,20 @@ def test_delete_sheep():
     # Confirm the sheep is gone
     response = client.get("/sheep/2")
     assert response.status_code == 404
+
+
+def test_update_sheep():
+    updated_data = {
+        "id": 3,
+        "name": "Lamb Chop",
+        "breed": "Dorset",
+        "sex": "wether"
+    }
+
+    response = client.put("/sheep/3", json=updated_data)
+    assert response.status_code == 200
+    assert response.json() == updated_data
+
+    # Confirm the change persisted
+    get_response = client.get("/sheep/3")
+    assert get_response.json() == updated_data
