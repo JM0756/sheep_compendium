@@ -15,6 +15,13 @@ class SheepDB:
     # Add the new sheep to the database
         self.sheep_data[sheep.id] = sheep
         return sheep
+    def delete_sheep(self, sheep_id: int) -> bool:
+    # Check if the sheep ID exists
+        if sheep_id not in self.sheep_data:
+            return False
+    # Delete the sheep from the database
+        del self.sheep_data[sheep_id]
+        return True
 
 db = SheepDB()
 db.sheep_data = {
