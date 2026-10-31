@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException, status
-from traitlets import List
+from typing import List
 from models.models import Sheep
 from models.db import db
 
