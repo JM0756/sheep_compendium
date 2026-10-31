@@ -35,3 +35,17 @@ def test_add_sheep():
     # Verify that the sheep was actually added to the database by retrieving it by ID
     get_response = client.get("/sheep/24")
     assert get_response.json() == new_sheep
+
+
+def test_delete_sheep():
+    # Confirm the sheep exists before deleting
+    response = client.get("/sheep/2")
+    assert response.status_code == 200
+
+    # Send a DELETE request
+    response = client.delete("/sheep/2")
+    assert response.status_code == 204
+
+    # Confirm the sheep is gone
+    response = client.get("/sheep/2")
+    assert response.status_code == 404

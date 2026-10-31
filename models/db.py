@@ -23,6 +23,14 @@ class SheepDB:
         del self.sheep_data[sheep_id]
         return True
 
+    def update_sheep(self, sheep_id: int, sheep: Sheep) -> Sheep:
+        # Check if the sheep ID exists
+        if sheep_id not in self.sheep_data:
+            return None
+        # Update the sheep in the database
+        self.sheep_data[sheep_id] = sheep
+        return sheep
+
 db = SheepDB()
 db.sheep_data = {
     1: Sheep(id=1, name="Spice", breed="Gotland", sex="ewe"),
