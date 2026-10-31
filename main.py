@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException, status
+from traitlets import List
 from models.models import Sheep
 from models.db import db
 
@@ -35,3 +36,13 @@ def update_sheep(sheep_id: int, sheep: Sheep):
     if updated is None:
         raise HTTPException(status_code=404, detail="Sheep not found")
     return updated
+
+
+@app.get("/sheep/", response_model=List[Sheep])
+def read_all_sheep():
+    return db.get_all_sheep()
+
+
+@app.get("/sheep/{sheep_id}", response_model=Sheep)
+def read_sheep(sheep_id: int):
+    ...

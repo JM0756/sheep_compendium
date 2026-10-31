@@ -23,6 +23,9 @@ class SheepDB:
         del self.sheep_data[sheep_id]
         return True
 
+    def get_all_sheep(self) -> List[Sheep]:
+        return list(self.sheep_data.values())
+
     def update_sheep(self, sheep_id: int, sheep: Sheep) -> Sheep:
         # Check if the sheep ID exists
         if sheep_id not in self.sheep_data:

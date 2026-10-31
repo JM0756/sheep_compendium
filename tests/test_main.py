@@ -1,5 +1,6 @@
 from fastapi.testclient import TestClient
 from main import app
+from models import db
 
 client = TestClient(app)
 
@@ -66,3 +67,11 @@ def test_update_sheep():
     # Confirm the change persisted
     get_response = client.get("/sheep/3")
     assert get_response.json() == updated_data
+
+
+def test_read_all_sheep():
+    response = client.get("/sheep/")
+    assert response.status_code == 200
+    data = response.json()
+    assert isinstance(data, list)
+    assert len(data) == len(db.sheep_data)
